@@ -3,5 +3,30 @@
   
   
   
+  <entry>
+    <title>搭建Web App的骨架</title>
+    <link href="/2021/08/11/%E6%90%AD%E5%BB%BAWeb-App%E7%9A%84%E9%AA%A8%E6%9E%B6/"/>
+    <url>/2021/08/11/%E6%90%AD%E5%BB%BAWeb-App%E7%9A%84%E9%AA%A8%E6%9E%B6/</url>
+    
+    <content type="html"><![CDATA[<h1 id="搭建Web-App的骨架"><a href="#搭建Web-App的骨架" class="headerlink" title="搭建Web App的骨架"></a>搭建Web App的骨架</h1><blockquote><p>采用异步IO模式，利用aiohttp提供的框架创建了一个简单的服务器，监听9000端口的HTTP请求，这是最基本的操作，后续工作都将在这个服务器上进行。</p></blockquote><p>须实现的功能</p><blockquote><p>一直监听端口、基本的网页显示</p></blockquote><p>编写app.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging; logging.basicConfig(level=logging.INFO)<br><br><span class="hljs-keyword">import</span> asyncio, os, json, time<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-keyword">from</span> aiohttp <span class="hljs-keyword">import</span> web<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">request</span>):</span><span class="hljs-comment">#可以看到这里返回的是html的源码，后续会将html源码放到文件夹中，使用链接方式引用</span><br>    <span class="hljs-keyword">return</span> web.Response(body=<span class="hljs-string">b&#x27;&lt;h1&gt;Awesome&lt;/h1&gt;&#x27;</span>)<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">init</span>(<span class="hljs-params">loop</span>):</span><br>    app = web.Application(loop=loop)<br>    app.router.add_route(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>, index) <span class="hljs-comment">#对于首页的 / 请求进行相应，响应方法为上面的index</span><br>    srv = <span class="hljs-keyword">await</span> loop.create_server(app.make_handler(), <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">9000</span>)<span class="hljs-comment">#监听IP + port</span><br>    logging.info(<span class="hljs-string">&#x27;server started at http://127.0.0.1:9000...&#x27;</span>)<br>    <span class="hljs-keyword">return</span> srv<br><br><span class="hljs-comment"># 获取eventloop</span><br>loop = asyncio.get_event_loop()<br><span class="hljs-comment"># 然后加入运行事件</span><br>loop.run_until_complete(init(loop))<br>loop.run_forever()<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python实战(廖雪峰)</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>

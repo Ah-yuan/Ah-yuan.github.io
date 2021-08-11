@@ -18,9 +18,25 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>Categories - Hexo</title>
+  <title>搭建Web App的骨架 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +163,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Category">
+            <span class="h2" id="subtitle" title="搭建Web App的骨架">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-11 16:12" pubdate>
+        August 11, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      245 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,69 +215,94 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-
-
-
-
-
-<div class="category-list">
-  
-  
-  
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-23eeeb4347bdd26bfc6b7ee9a3b755dd" role="tab" data-toggle="collapse" href="#collapse-23eeeb4347bdd26bfc6b7ee9a3b755dd"
-        aria-expanded="false"
-      >
-        python
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/python/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-23eeeb4347bdd26bfc6b7ee9a3b755dd" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-23eeeb4347bdd26bfc6b7ee9a3b755dd">
-    
-    
       
-      
-        <a href="/2021/08/11/%E6%90%AD%E5%BB%BAWeb-App%E7%9A%84%E9%AA%A8%E6%9E%B6/" class="list-group-item list-group-item-action">
-          <span class="category-post">搭建Web App的骨架</span>
-        </a>
-      
-    
-  </div>
 
-        
-      </div>
-    </div>
-  
-</div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">搭建Web App的骨架</h1>
+            
+            <div class="markdown-body">
+              <h1 id="搭建Web-App的骨架"><a href="#搭建Web-App的骨架" class="headerlink" title="搭建Web App的骨架"></a>搭建Web App的骨架</h1><blockquote>
+<p>采用异步IO模式，利用aiohttp提供的框架创建了一个简单的服务器，监听9000端口的HTTP请求，这是最基本的操作，后续工作都将在这个服务器上进行。</p>
+</blockquote>
+<p>须实现的功能</p>
+<blockquote>
+<p>一直监听端口、基本的网页显示</p>
+</blockquote>
+<p>编写app.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging; logging.basicConfig(level=logging.INFO)<br><br><span class="hljs-keyword">import</span> asyncio, os, json, time<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-keyword">from</span> aiohttp <span class="hljs-keyword">import</span> web<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">request</span>):</span><span class="hljs-comment">#可以看到这里返回的是html的源码，后续会将html源码放到文件夹中，使用链接方式引用</span><br>    <span class="hljs-keyword">return</span> web.Response(body=<span class="hljs-string">b&#x27;&lt;h1&gt;Awesome&lt;/h1&gt;&#x27;</span>)<br><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">init</span>(<span class="hljs-params">loop</span>):</span><br>    app = web.Application(loop=loop)<br>    app.router.add_route(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>, index) <span class="hljs-comment">#对于首页的 / 请求进行相应，响应方法为上面的index</span><br>    srv = <span class="hljs-keyword">await</span> loop.create_server(app.make_handler(), <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">9000</span>)<span class="hljs-comment">#监听IP + port</span><br>    logging.info(<span class="hljs-string">&#x27;server started at http://127.0.0.1:9000...&#x27;</span>)<br>    <span class="hljs-keyword">return</span> srv<br><br><span class="hljs-comment"># 获取eventloop</span><br>loop = asyncio.get_event_loop()<br><span class="hljs-comment"># 然后加入运行事件</span><br>loop.run_until_complete(init(loop))<br>loop.run_forever()<br></code></pre></td></tr></table></figure>
 
-              </div>
+
+
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0/">python实战(廖雪峰)</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -304,9 +382,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

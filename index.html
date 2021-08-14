@@ -182,20 +182,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/12/%E7%BC%96%E5%86%99ORM%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
-          编写ORM操作数据库
+        <a href="/2021/08/14/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+          python实战-廖雪峰-代码解析（四）
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/12/%E7%BC%96%E5%86%99ORM%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
+        <a href="/2021/08/14/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
           
           
             
           
-          编写ORM操作数据库ORM的概念：
-
-对象关系映射（Object Relational Mapping），用于实现面向对象编程语言里不同类型系统的数据之间的转换 。从效果上说，它其实是创建了一个可在编程语言里使用的–“虚拟对象数据库”。映射这个词用在这里非常恰当，ORM就是我们在程序代码中所操作的对象和数据库中的数据之间的一种映射关系，有了这个映射关系，我们再操作对象就相当于操作数据库。这样的特点
+          10、编写日志创建页编写一个REST API，用于创建一个Blog
+12345678910111213141516171819202122232425262728293031323334353637#handlers.py新增def check_admin(request):    if request.__user__ is None or not request.__user__.admin:
         </a>
       </p>
 
@@ -203,8 +202,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-12 09:08" pubdate>
-              2021-08-12
+            <time datetime="2021-08-14 18:52" pubdate>
+              2021-08-14
             </time>
           </div>
         
@@ -234,26 +233,25 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/11/%E6%90%AD%E5%BB%BAWeb-App%E7%9A%84%E9%AA%A8%E6%9E%B6/" target="_self">
-          搭建Web App的骨架
+        <a href="/2021/08/13/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+          python实战-廖雪峰-代码解析（三）
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/08/11/%E6%90%AD%E5%BB%BAWeb-App%E7%9A%84%E9%AA%A8%E6%9E%B6/" target="_self">
+        <a href="/2021/08/13/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
           
           
             
           
-          搭建Web App的骨架
-采用异步IO模式，利用aiohttp提供的框架创建了一个简单的服务器，监听9000端口的HTTP请求，这是最基本的操作，后续工作都将在这个服务器上进行。
+          7、构建前端
+HTML是骨架；javascript是肌肉；CSS是衣服。
+为解决HTML代码复用，可以将复用代码提取为模板；有两种思路：
+1）通过include把页面拆成多部份引用
+2）“继承”模板的方式，是通过编写一个“父模板”，在父模板中定义一些可替换的block（块）。然后，编写多个“子模板”，每个子模板都可以只替换父模板定义的block。
 
-须实现的功能
-
-一直监听端口、基本的网页显示
-
-编写app.py
-12345678910111213141516171819202122import logging; logging.basicConfig(level
+父模板base.html
+12345678910
         </a>
       </p>
 
@@ -261,8 +259,119 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-11 16:12" pubdate>
+            <time datetime="2021-08-13 18:52" pubdate>
+              2021-08-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/python/">python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0/">python实战(廖雪峰)</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/11/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          python实战-廖雪峰-代码解析（二）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/11/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          
+          
+            
+          
+          4、编写Web框架参考链接：
+4.1web框架web程序工作流程：
+
+用户访问网址（URL）——–浏览器便生成对应的HTTP请求——–Web服务器接收请求——–通过WSGI将HTTP格式的请求数据转换成我们的Flask程序能够使用的Python数据——–Flask根据请求的URL执行对应的视图函数，获取返回值生成响应。——–响应依次经过WSGI转换生成HTTP响应——–请求的客户端接收——–浏览器
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-11 10:50" pubdate>
               2021-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/python/">python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0/">python实战(廖雪峰)</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/10/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+          python实战-廖雪峰-代码解析（一）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/10/python%E5%AE%9E%E6%88%98-%E5%BB%96%E9%9B%AA%E5%B3%B0-%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+          
+          
+            
+          
+          1、搭建Web App的骨架
+采用异步IO模式，利用aiohttp提供的框架创建了一个简单的服务器，监听9000端口的HTTP请求，这是最基本的操作，后续工作都将在这个服务器上进行。
+
+须实现的功能
+
+一直监听端口、基本的网页显示
+
+编写app.py
+12345678910111213141516171819202122import logging; logging.basicConfig(lev
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-10 10:44" pubdate>
+              2021-08-10
             </time>
           </div>
         

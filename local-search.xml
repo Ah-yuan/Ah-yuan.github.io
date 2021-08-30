@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>linux升级NVIDIA显卡驱动</title>
+    <link href="/archives/d996c1ea.html"/>
+    <url>/archives/d996c1ea.html</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>下载对应版本的驱动</p><p><a href="https://www.nvidia.com/Download/index.aspx?lang=en-us">Download Drivers | NVIDIA</a></p></li></ol><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210830154208.png"></p><ol start="2"><li><p>卸载已有驱动</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">NVIDIA-Linux-x86_64-418.81.01.run --uninstall<br></code></pre></td></tr></table></figure><p>注：</p><blockquote><p>如果提示：<code>./nvidia-installer: unrecognized option: &quot;--unistall&quot;</code></p><p>使用<code>nvidia-unistall</code>卸载已有驱动</p></blockquote></li><li><p>进入文本模式</p><p><code>init 3</code></p><p>否则会报 <code>ERROR: You appear to be running an X server; please exit X before installing.    </code> </p></li><li><p>重启服务器</p><p>卸载旧驱动后还会有组件再被使用，可能会报 <code>An NVIDIA kernel module &#39;nvidia-uvm&#39; appears to already be loaded in your kernel.</code>，简单的解决方法是重启服务器。</p></li><li><p>安装新驱动</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NVIDIA</span>-Linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>-<span class="hljs-number">470</span>.<span class="hljs-number">57</span>.<span class="hljs-number">02</span>.run<br></code></pre></td></tr></table></figure></li><li><p>检查是否正常</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@cn050 ~]# nvidia-smi <br>Mon Aug 30 15:10:45 2021       <br>+-----------------------------------------------------------------------------+<br>| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |<br>|-------------------------------+----------------------+----------------------+<br>| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |<br>| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |<br>|                               |                      |               MIG M. |<br>|===============================+======================+======================|<br>|   0  Tesla T4            Off  | 00000000:2F:00.0 Off |                    0 |<br>| N/A   77C    P0    32W /  70W |      0MiB / 15109MiB |      0%      Default |<br>|                               |                      |                  N/A |<br>+-------------------------------+----------------------+----------------------+<br>                                                                               <br>+-----------------------------------------------------------------------------+<br>| Processes:                                                                  |<br>|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |<br>|        ID   ID                                                   Usage      |<br>|=============================================================================|<br>|  No running processes found                                                 |<br>+-----------------------------------------------------------------------------+<br></code></pre></td></tr></table></figure></li><li><p>恢复图形界面</p><p><code>init 5</code></p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>云计算</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>图形计算</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ZFS存储配置---文件服务</title>
     <link href="/archives/undefined.html"/>
     <url>/archives/undefined.html</url>

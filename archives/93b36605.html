@@ -18,7 +18,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>linux升级NVIDIA显卡驱动 - Ah-yuan</title>
+  <title>hexo-github博客部署 - Ah-yuan</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="linux升级NVIDIA显卡驱动">
+            <span class="h2" id="subtitle" title="hexo-github博客部署">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-30 15:23" pubdate>
-        2021年8月30日 下午
+      <time datetime="2021-08-16 10:42" pubdate>
+        2021年8月16日 上午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      243 字
+      1.1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      13
        分钟
     </span>
   
@@ -225,40 +225,89 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">linux升级NVIDIA显卡驱动</h1>
+            <h1 style="display: none">hexo-github博客部署</h1>
             
             <div class="markdown-body">
-              <ol>
-<li><p>下载对应版本的驱动</p>
-<p><a target="_blank" rel="noopener" href="https://www.nvidia.com/Download/index.aspx?lang=en-us">Download Drivers | NVIDIA</a></p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210830154208.png" srcset="/img/loading.gif" lazyload></p>
-<ol start="2">
-<li><p>卸载已有驱动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">NVIDIA-Linux-x86_64-418.81.01.run --uninstall<br></code></pre></td></tr></table></figure>
+              <p><strong>环境搭建</strong></p>
+<h1 id="1、安装git"><a href="#1、安装git" class="headerlink" title="1、安装git"></a>1、安装git</h1><p>1)下载地址：<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a><br>2).安装：双击安装，一直点击下一步即可</p>
+<p><strong>注：</strong></p>
+<p>报错：’git’ 不是内部或外部命令，也不是可运行的程序 或批处理文件。</p>
+<p>解决方法：</p>
+<p>我的电脑右键-属性-高级系统设置-环境变量-在系统变量中找到path-新建-输入自己git.exe的路径；</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\g</span>it<span class="hljs-symbol">\G</span>it<span class="hljs-symbol">\b</span>in <br></code></pre></td></tr></table></figure>
 
-<p>注：</p>
+<h1 id="2、安装node-js"><a href="#2、安装node-js" class="headerlink" title="2、安装node.js"></a>2、安装node.js</h1><p>1)下载地址：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a><br>2).安装：双击安装，一直点击下一步即可</p>
+<h1 id="3、安装hexo"><a href="#3、安装hexo" class="headerlink" title="3、安装hexo"></a>3、安装hexo</h1><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">npm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-1-初始化blog"><a href="#3-1-初始化blog" class="headerlink" title="3.1 初始化blog"></a>3.1 初始化blog</h2><p>比较推荐大家按照cmder软件；</p>
+<p>首先新建博客文件夹blog，切换目录至博客；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> blog<br></code></pre></td></tr></table></figure>
+
+<p>创建并初始化博客文件夹blog</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span> blog<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-测试运行"><a href="#3-2-测试运行" class="headerlink" title="3.2 测试运行"></a>3.2 测试运行</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs verilog">hexo <span class="hljs-keyword">generate</span> <br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-启动blog：本地预览"><a href="#3-3-启动blog：本地预览" class="headerlink" title="3.3 启动blog：本地预览"></a>3.3 启动blog：本地预览</h2><p>文件夹中出现一个public的文件夹，public的文件夹是hexo生成的一个完整的静态网站；</p>
+<p>运行以下命令预览本地博客：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">hexo <span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
+<p>本地blog创建完成，默认通过127.0.0.1:4000访问。<br>如果你不喜欢默认主题，可根据下面介绍换上其他漂亮的皮肤</p>
+<h2 id="3-4-替换主题"><a href="#3-4-替换主题" class="headerlink" title="3.4 替换主题"></a>3.4 替换主题</h2><p>可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo官网</a>查看自己喜欢的主题<br>通过git clone [url] themes/xxx 将主题克隆到本地，<br>修改 <code>/blog/_config.yml</code> 中的theme</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">theme:</span> fluid<br></code></pre></td></tr></table></figure>
+
+<p>然后再</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">hexo clean <span class="hljs-meta">&amp;&amp; hexo g &amp;&amp; hexo s  <span class="hljs-comment">// g就是generate缩写  d就是deploy 远程部署</span></span><br></code></pre></td></tr></table></figure>
+
+<p>本地重载，就可以再localhost:4000查看部署情况</p>
+<h1 id="4、写文章"><a href="#4、写文章" class="headerlink" title="4、写文章"></a>4、写文章</h1><p>文章在 <code>blog/source/_posts/</code> 下，以markdown格式写成，推荐使用<code>typerora</code>作为编写工具。</p>
+<p>推荐使用 <code>hexo new 文章名</code> 来创建一篇文章<br>执行命令 仍是在 <code>blog</code> 目录下，打开 <code>cmder</code> 命令框。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 创建一个标题为“xxx”的文章</span><br>hexo <span class="hljs-keyword">new</span> <span class="hljs-string">&quot;git教程&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后使用typeora编写即可</p>
+<h1 id="5、搭建github-pages"><a href="#5、搭建github-pages" class="headerlink" title="5、搭建github pages"></a>5、搭建github pages</h1><p>想让博客出现在互联网上，有两种选择：</p>
+<p>A:搭建服务器</p>
+<p>B:使用网站托管等静态网站展现方式</p>
+<h2 id="5-1-注册github账户"><a href="#5-1-注册github账户" class="headerlink" title="5.1 注册github账户"></a>5.1 注册github账户</h2><p>到<a target="_blank" rel="noopener" href="https://github.com/">github官网</a>注册一个github账户</p>
+<h2 id="5-2-配置登录免密码"><a href="#5-2-配置登录免密码" class="headerlink" title="5.2 配置登录免密码"></a>5.2 配置登录免密码</h2><h2 id="5-3-创建github远程仓库"><a href="#5-3-创建github远程仓库" class="headerlink" title="5.3 创建github远程仓库"></a>5.3 创建github远程仓库</h2><p>在github上创建一个仓库 <code>用户名.github.io</code></p>
+<h2 id="5-4-配置Hexo"><a href="#5-4-配置Hexo" class="headerlink" title="5.4 配置Hexo"></a>5.4 配置Hexo</h2><p>修改 <code>_config.yml</code>,配置远程部署</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">   type:</span> git<br><span class="hljs-symbol">   repo:</span> git@github.com:xxx/xxx.github.io.git<br><span class="hljs-symbol">   branch:</span> master<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-5-安装git部署插件"><a href="#5-5-安装git部署插件" class="headerlink" title="5.5 安装git部署插件"></a>5.5 安装git部署插件</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm install hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-6-远程部署"><a href="#5-6-远程部署" class="headerlink" title="5.6  远程部署"></a>5.6  远程部署</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="5-7-测试"><a href="#5-7-测试" class="headerlink" title="5.7 测试"></a>5.7 测试</h2><p>打开 <code>xxx.github.io</code> ，就能看到你的blog了</p>
 <blockquote>
-<p>如果提示：<code>./nvidia-installer: unrecognized option: &quot;--unistall&quot;</code></p>
-<p>使用<code>nvidia-unistall</code>卸载已有驱动</p>
+<p><strong>存在问题：GitHub Pages 只能被谷歌收录，无法被百度收录</strong></p>
+</blockquote>
+<h1 id="6、搭建图床"><a href="#6、搭建图床" class="headerlink" title="6、搭建图床"></a>6、搭建图床</h1><p>GitHub 图床是个不错的选择，利用 jsDelivr CDN 加速访问（一个免费开源的 CDN 解决方案），PicGo 工具一键上传，操作简单高效，目前免费图床的最佳解决方案！</p>
+<ol>
+<li><p>登录/注册GitHub，新建一个仓库，填写好仓库名，仓库描述，仓库初始化</p>
+</li>
+<li><p>在主页选择Settings-Developer settings-Personal access tokens-Generate new token, 填写好描述，勾选repo，然后点击Generate token生成一个Token，</p>
+<blockquote>
+<p>注意这个Token只会显示一次，自己先保存下来 </p>
 </blockquote>
 </li>
-<li><p>进入文本模式</p>
-<p><code>init 3</code></p>
-<p>否则会报 <code>ERROR: You appear to be running an X server; please exit X before installing.    </code> </p>
+<li><p>下载<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/picgo/releases">Releases · Molunerfinn/PicGo (github.com)</a></p>
 </li>
-<li><p>重启服务器</p>
-<p>卸载旧驱动后还会有组件再被使用，可能会报 <code>An NVIDIA kernel module &#39;nvidia-uvm&#39; appears to already be loaded in your kernel.</code>，简单的解决方法是重启服务器。</p>
-</li>
-<li><p>安装新驱动</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NVIDIA</span>-Linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>-<span class="hljs-number">470</span>.<span class="hljs-number">57</span>.<span class="hljs-number">02</span>.run<br></code></pre></td></tr></table></figure></li>
-<li><p>检查是否正常</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@cn050 ~]# nvidia-smi <br>Mon Aug 30 15:10:45 2021       <br>+-----------------------------------------------------------------------------+<br>| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |<br>|-------------------------------+----------------------+----------------------+<br>| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |<br>| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |<br>|                               |                      |               MIG M. |<br>|===============================+======================+======================|<br>|   0  Tesla T4            Off  | 00000000:2F:00.0 Off |                    0 |<br>| N/A   77C    P0    32W /  70W |      0MiB / 15109MiB |      0%      Default |<br>|                               |                      |                  N/A |<br>+-------------------------------+----------------------+----------------------+<br>                                                                               <br>+-----------------------------------------------------------------------------+<br>| Processes:                                                                  |<br>|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |<br>|        ID   ID                                                   Usage      |<br>|=============================================================================|<br>|  No running processes found                                                 |<br>+-----------------------------------------------------------------------------+<br></code></pre></td></tr></table></figure></li>
-<li><p>恢复图形界面</p>
-<p><code>init 5</code></p>
+<li><p>配置PicGo</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/tc_config.jpg" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>设定仓库名：按照【用户名/图床仓库名】的格式填写</p>
+<p>设定分支名：【master】</p>
+<p>设定Token：粘贴之前生成的【Token】</p>
+<p>指定存储路径：填写想要储存的路径，如【ITRHX-PIC/】，这样就会在仓库下创建一个名为 ITRHX-PIC 的文件夹，图片将会储存在此文件夹中</p>
+<p>设定自定义域名：它的作用是，在图片上传后，PicGo 会按照【自定义域名+储存路径+上传的图片名】的方式生成访问链接，并放到粘贴板上;在编写文档时，只需要粘贴链接（<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/tc_config.jpg)%E5%8D%B3%E5%8F%AF%E5%9C%A8%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E6%98%BE%E7%A4%BA">https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/tc_config.jpg)即可在静态网站显示</a></p>
+</blockquote>
 </li>
 </ol>
+<h1 id="7、搭建gitee-pages"><a href="#7、搭建gitee-pages" class="headerlink" title="7、搭建gitee pages"></a>7、搭建gitee pages</h1><p>在gitee主页注册账号：<a target="_blank" rel="noopener" href="https://gitee.com/signup">注册 - Gitee.com</a></p>
+<p>1）把 GitHub Pages 仓库复制到码云。</p>
+<p>登录码云，点击右上角的 + 号，选择「新建仓库」，点击「导入仓库」，选择从github导入，跳出 GitHub 认证；</p>
+<p>2）启用码云 Pages。<br>在菜单栏找到服务，选择「Gitee Pages」，点击「启动」</p>
+<p>可以直接点击码云 Page 生成的网站地址进行访问，可以确认 GitHub Pages 已经成功同步到码云 Pages 了。</p>
 
             </div>
             <hr>
@@ -268,7 +317,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/">云计算</a>
+                      <a class="hover-with-bg" href="/categories/blog/">blog</a>
                     
                   </div>
                 
@@ -276,7 +325,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%BD%A2%E8%AE%A1%E7%AE%97/">图形计算</a>
+                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
                     
                   </div>
                 
@@ -293,12 +342,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/archives/48108407.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python爬虫猫眼前100</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/archives/daa27d8e.html">
-                        <span class="hidden-mobile">ZFS存储配置---文件服务</span>
+                      <a href="/archives/a5e6400a.html">
+                        <span class="hidden-mobile">python实战-廖雪峰-代码解析（四）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

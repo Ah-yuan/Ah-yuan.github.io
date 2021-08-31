@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>PicGo+GitHub图床</title>
+    <link href="/archives/826499a4.html"/>
+    <url>/archives/826499a4.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="GitHub新建仓库"><a href="#GitHub新建仓库" class="headerlink" title="GitHub新建仓库"></a>GitHub新建仓库</h2><ol><li><p>创建GitHub图床之前，需要注册/登陆GitHub账号</p></li><li><p>创建Repository</p><p>点击”New repository”按钮</p></li></ol><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210831095825.png"></p><p>​    3. 生成一个Token用于操作GitHub repository</p><p>​    回到主页，点击”Settings”按钮</p><p>​    进入页面后，点击”Developer settings”按钮</p><p>​    点击”Personal access tokens”按钮</p><p>​    <a href="https://github.com/settings/tokens">Personal Access Tokens (github.com)</a></p><p>​    填写描述，选择”repo”权限，然后点击”Generate token”按钮<img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210831101529.png"></p><h2 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h2><ol><li><p>下载安装并运行PicGo</p></li><li><p>配置图床</p></li></ol><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210831101650.png"></p><p>第一行设定仓库名按照“账户名/仓库名的格式填写”</p><p>第二行分支名填写“master”或”main“，看自己仓库设置</p><p>第三行将之前的Token粘贴在这里</p><p>第四行填写仓库下的文件夹名称</p><p>第五行自定义域名的作用是在上传图片后成功后，PicGo会将“自定义域名+上传的图片名”生成的访问链接，放到剪切板上，自定义域名需要按照这样去填写：<a href="https://raw.githubusercontent.com/%E8%B4%A6%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D/master%EF%BC%8C">https://raw.githubusercontent.com/账户名/仓库名/master，</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>linux升级NVIDIA显卡驱动</title>
     <link href="/archives/d996c1ea.html"/>
     <url>/archives/d996c1ea.html</url>

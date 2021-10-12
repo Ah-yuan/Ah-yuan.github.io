@@ -79,6 +79,31 @@
   
   
   <entry>
+    <title>win10 + docker使用mysql</title>
+    <link href="/archives/87fb5dac.html"/>
+    <url>/archives/87fb5dac.html</url>
+    
+    <content type="html"><![CDATA[<p>目的：win10 + docker部署mysql，使用navicate连接数据库并使用</p><h2 id="安装部署mysql"><a href="#安装部署mysql" class="headerlink" title="安装部署mysql"></a>安装部署mysql</h2><ol><li><p>拉取MySQL镜像</p><p>查找Docker Hub上的mysql镜像</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker search mysql</span><br></code></pre></td></tr></table></figure><p>建议指定标签,默认自动拉取最新版本镜像（8.0）</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker pull mysql:5.6</span><br></code></pre></td></tr></table></figure><p>等待下载完成后，我们就可以在本地镜像列表里查到REPOSITORY为mysql,标签为5.6的镜像。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker image ls</span><br>REPOSITORY   TAG       IMAGE ID       CREATED       SIZE<br>mysql        5.6       7f8929383df0   2 weeks ago   303MB<br></code></pre></td></tr></table></figure><p><strong>从这里可以看出空间没节省多少。。</strong></p></li><li><p>创建并启动一个MySQL容器</p><p>创建</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --name mysql-learning -e MYSQL_ROOT_PASSWORD=<span class="hljs-built_in">test</span> -p 3306:3306 -d mysql:5.6</span><br></code></pre></td></tr></table></figure><p>查看容器运行状态</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker ps</span><br>CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                       NAMES<br>69e72dbe39b5   mysql:5.6   &quot;docker-entrypoint.s…&quot;   9 seconds ago   Up 7 seconds   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp   mysql-learning<br></code></pre></td></tr></table></figure></li><li><p>进入容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker <span class="hljs-built_in">exec</span> -it mysql-learning bash</span><br>root@69e72dbe39b5:/# mysql -uroot -ptest<br>Warning: Using a password on the command line interface can be insecure.<br>Welcome to the MySQL monitor.  Commands end with ; or \g.<br>Your MySQL connection id is 1<br>Server version: 5.6.51 MySQL Community Server (GPL)<br><br>Copyright (c) 2000, 2021, Oracle and/or its affiliates. All rights reserved.<br><br>Oracle is a registered trademark of Oracle Corporation and/or its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.<br><span class="hljs-meta"></span><br><span class="hljs-meta">mysql&gt;</span><br></code></pre></td></tr></table></figure></li></ol><h2 id="navicate连接数据库"><a href="#navicate连接数据库" class="headerlink" title="navicate连接数据库"></a>navicate连接数据库</h2><p>在宿主机上使用navicate客户端连接容器内的数据库</p><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210901155851.png"></p><p>​    主机：localhost，<strong>无法使用容器内地址</strong></p><p>​    端口号:映射的端口号,在创建容器的时候就配置了</p><p>​    用户名:root</p><p>​    密码:创建时配置的</p><blockquote><p><strong>注：</strong>目前不支持win与linux容器使用桥接通信：<a href="https://docs.docker.com/desktop/windows/networking/">Windows | 的 Docker 桌面中的网络功能码头文件</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>云计算</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>容器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ZFS存储配置---文件服务</title>
     <link href="/archives/daa27d8e.html"/>
     <url>/archives/daa27d8e.html</url>

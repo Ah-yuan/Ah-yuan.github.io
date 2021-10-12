@@ -18,7 +18,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>linux升级NVIDIA显卡驱动 - Ah-yuan</title>
+  <title>win10 + docker使用mysql - Ah-yuan</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="linux升级NVIDIA显卡驱动">
+            <span class="h2" id="subtitle" title="win10 + docker使用mysql">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-30 15:23" pubdate>
-        2021年8月30日 下午
+      <time datetime="2021-08-24 16:24" pubdate>
+        2021年8月24日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      243 字
+      405 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      6
        分钟
     </span>
   
@@ -233,40 +233,41 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">linux升级NVIDIA显卡驱动</h1>
+            <h1 style="display: none">win10 + docker使用mysql</h1>
             
             <div class="markdown-body">
-              <ol>
-<li><p>下载对应版本的驱动</p>
-<p><a target="_blank" rel="noopener" href="https://www.nvidia.com/Download/index.aspx?lang=en-us">Download Drivers | NVIDIA</a></p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210830154208.png" srcset="/img/loading.gif" lazyload></p>
-<ol start="2">
-<li><p>卸载已有驱动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">NVIDIA-Linux-x86_64-418.81.01.run --uninstall<br></code></pre></td></tr></table></figure>
+              <p>目的：win10 + docker部署mysql，使用navicate连接数据库并使用</p>
+<h2 id="安装部署mysql"><a href="#安装部署mysql" class="headerlink" title="安装部署mysql"></a>安装部署mysql</h2><ol>
+<li><p>拉取MySQL镜像</p>
+<p>查找Docker Hub上的mysql镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker search mysql</span><br></code></pre></td></tr></table></figure>
 
-<p>注：</p>
-<blockquote>
-<p>如果提示：<code>./nvidia-installer: unrecognized option: &quot;--unistall&quot;</code></p>
-<p>使用<code>nvidia-unistall</code>卸载已有驱动</p>
-</blockquote>
+<p>建议指定标签,默认自动拉取最新版本镜像（8.0）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker pull mysql:5.6</span><br></code></pre></td></tr></table></figure>
+
+<p>等待下载完成后，我们就可以在本地镜像列表里查到REPOSITORY为mysql,标签为5.6的镜像。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker image ls</span><br>REPOSITORY   TAG       IMAGE ID       CREATED       SIZE<br>mysql        5.6       7f8929383df0   2 weeks ago   303MB<br></code></pre></td></tr></table></figure>
+
+<p><strong>从这里可以看出空间没节省多少。。</strong></p>
 </li>
-<li><p>进入文本模式</p>
-<p><code>init 3</code></p>
-<p>否则会报 <code>ERROR: You appear to be running an X server; please exit X before installing.    </code> </p>
-</li>
-<li><p>重启服务器</p>
-<p>卸载旧驱动后还会有组件再被使用，可能会报 <code>An NVIDIA kernel module &#39;nvidia-uvm&#39; appears to already be loaded in your kernel.</code>，简单的解决方法是重启服务器。</p>
-</li>
-<li><p>安装新驱动</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">NVIDIA</span>-Linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>-<span class="hljs-number">470</span>.<span class="hljs-number">57</span>.<span class="hljs-number">02</span>.run<br></code></pre></td></tr></table></figure></li>
-<li><p>检查是否正常</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@cn050 ~]# nvidia-smi <br>Mon Aug 30 15:10:45 2021       <br>+-----------------------------------------------------------------------------+<br>| NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |<br>|-------------------------------+----------------------+----------------------+<br>| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |<br>| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |<br>|                               |                      |               MIG M. |<br>|===============================+======================+======================|<br>|   0  Tesla T4            Off  | 00000000:2F:00.0 Off |                    0 |<br>| N/A   77C    P0    32W /  70W |      0MiB / 15109MiB |      0%      Default |<br>|                               |                      |                  N/A |<br>+-------------------------------+----------------------+----------------------+<br>                                                                               <br>+-----------------------------------------------------------------------------+<br>| Processes:                                                                  |<br>|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |<br>|        ID   ID                                                   Usage      |<br>|=============================================================================|<br>|  No running processes found                                                 |<br>+-----------------------------------------------------------------------------+<br></code></pre></td></tr></table></figure></li>
-<li><p>恢复图形界面</p>
-<p><code>init 5</code></p>
-</li>
+<li><p>创建并启动一个MySQL容器</p>
+<p>创建</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --name mysql-learning -e MYSQL_ROOT_PASSWORD=<span class="hljs-built_in">test</span> -p 3306:3306 -d mysql:5.6</span><br></code></pre></td></tr></table></figure>
+
+<p>查看容器运行状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker ps</span><br>CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                       NAMES<br>69e72dbe39b5   mysql:5.6   &quot;docker-entrypoint.s…&quot;   9 seconds ago   Up 7 seconds   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp   mysql-learning<br></code></pre></td></tr></table></figure></li>
+<li><p>进入容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker <span class="hljs-built_in">exec</span> -it mysql-learning bash</span><br>root@69e72dbe39b5:/# mysql -uroot -ptest<br>Warning: Using a password on the command line interface can be insecure.<br>Welcome to the MySQL monitor.  Commands end with ; or \g.<br>Your MySQL connection id is 1<br>Server version: 5.6.51 MySQL Community Server (GPL)<br><br>Copyright (c) 2000, 2021, Oracle and/or its affiliates. All rights reserved.<br><br>Oracle is a registered trademark of Oracle Corporation and/or its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.<br><span class="hljs-meta"></span><br><span class="hljs-meta">mysql&gt;</span><br></code></pre></td></tr></table></figure></li>
 </ol>
+<h2 id="navicate连接数据库"><a href="#navicate连接数据库" class="headerlink" title="navicate连接数据库"></a>navicate连接数据库</h2><p>在宿主机上使用navicate客户端连接容器内的数据库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210901155851.png" srcset="/img/loading.gif" lazyload></p>
+<p>​    主机：localhost，<strong>无法使用容器内地址</strong></p>
+<p>​    端口号:映射的端口号,在创建容器的时候就配置了</p>
+<p>​    用户名:root</p>
+<p>​    密码:创建时配置的</p>
+<blockquote>
+<p><strong>注：</strong>目前不支持win与linux容器使用桥接通信：<a target="_blank" rel="noopener" href="https://docs.docker.com/desktop/windows/networking/">Windows | 的 Docker 桌面中的网络功能码头文件</a></p>
+</blockquote>
 
             </div>
             <hr>
@@ -284,7 +285,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%BD%A2%E8%AE%A1%E7%AE%97/">图形计算</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E5%99%A8/">容器</a>
                     
                   </div>
                 
@@ -301,9 +302,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/archives/826499a4.html">
+                      <a href="/archives/d996c1ea.html">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PicGo+GitHub图床</span>
+                        <span class="hidden-mobile">linux升级NVIDIA显卡驱动</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -311,8 +312,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/archives/87fb5dac.html">
-                        <span class="hidden-mobile">win10 + docker使用mysql</span>
+                      <a href="/archives/daa27d8e.html">
+                        <span class="hidden-mobile">ZFS存储配置---文件服务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,242 +1,271 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.ah-yuan.top","root":"/","images":"/images","scheme":"Muse","version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="文件服务配置—ZFSZFS简介　　1、什么是zfs文件系统 　　　　ZFS文件系统的英文名称为Zettabyte File System,也叫动态文件系统（Dynamic File System）,是第一个128位文件系统。最初是由Sun公司为Solaris 10操作系统开发的文件系统。作为OpenSolaris开源计划的一部分，ZFS于2005年11月发布，被Sun称为是终极文件系统，经历了 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZFS存储配置---文件服务">
+<meta property="og:url" content="http://www.ah-yuan.top/archives/daa27d8e.html">
+<meta property="og:site_name" content="Ah-yuan">
+<meta property="og:description" content="文件服务配置—ZFSZFS简介　　1、什么是zfs文件系统 　　　　ZFS文件系统的英文名称为Zettabyte File System,也叫动态文件系统（Dynamic File System）,是第一个128位文件系统。最初是由Sun公司为Solaris 10操作系统开发的文件系统。作为OpenSolaris开源计划的一部分，ZFS于2005年11月发布，被Sun称为是终极文件系统，经历了 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172641.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823170459.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210824113200.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171251.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171928.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172023.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172047.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172108.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172207.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172233.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172252.png">
+<meta property="article:published_time" content="2021-08-23T09:30:20.000Z">
+<meta property="article:modified_time" content="2021-08-30T07:57:20.017Z">
+<meta property="article:author" content="Ah-yuan">
+<meta property="article:tag" content="ZFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172641.png">
+
+
+<link rel="canonical" href="http://www.ah-yuan.top/archives/daa27d8e.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.ah-yuan.top/archives/daa27d8e.html","path":"archives/daa27d8e.html","title":"ZFS存储配置---文件服务"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ZFS存储配置---文件服务 | Ah-yuan</title>
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
-  
-  <title>ZFS存储配置---文件服务 - Ah-yuan</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"www.ah-yuan.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"abb97d6f4df3bff6bf6e36efa7164e68","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"2f61s5lp5BylvRHSod8PCI66-gzGzoHsz","app_key":"SqkKhsJUVOkaBJwE8W45fGUK","server_url":null}},"search_path":"/local-search.xml"};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Ah-yuan</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Ah-yuan</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">站在风口</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ZFS存储配置---文件服务">
-              
-            </span>
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-23 17:30" pubdate>
-        2021年8月23日 下午
-      </time>
-    </span>
-  
+
+
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
 
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      2.5k 字
-    </span>
-  
+  <aside class="sidebar">
 
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      30
-       分钟
-    </span>
-  
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-  
-  
-    
-      <!-- LeanCloud 统计文章PV -->
-      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="leancloud-page-views"></span> 次
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E2%80%94ZFS"><span class="nav-number">1.</span> <span class="nav-text">文件服务配置—ZFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ZFS%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">ZFS简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZFS%E7%89%B9%E6%80%A7%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text">ZFS特性术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.3.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.4.</span> <span class="nav-text">前置准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0yum-%E6%BA%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">设置本地yum 源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">安装软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98%E8%B5%84%E6%BA%90"><span class="nav-number">1.5.</span> <span class="nav-text">创建和管理磁盘资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAzpool"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建zpool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-zfs-%E6%8C%82%E8%BD%BD%E7%82%B9"><span class="nav-number">1.5.2.</span> <span class="nav-text">修改 zfs 挂载点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AENFS%E5%85%B1%E4%BA%AB"><span class="nav-number">1.6.</span> <span class="nav-text">设置NFS共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vmware-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.7.</span> <span class="nav-text">Vmware 数据存储示例</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ah-yuan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ah-yuan</p>
+  <div class="site-description" itemprop="description">nothing</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ah-yuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ah-yuan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
-    
-  
-</div>
+  </div>
 
-            
-          </div>
 
-          
+
         </div>
       </div>
     </div>
-  </header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
-  <main>
+
+    </header>
+
     
-      
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">ZFS存储配置---文件服务</h1>
-            
-            <div class="markdown-body">
-              <h1 id="文件服务配置—ZFS"><a href="#文件服务配置—ZFS" class="headerlink" title="文件服务配置—ZFS"></a><strong>文件服务配置—ZFS</strong></h1><h2 id="ZFS简介"><a href="#ZFS简介" class="headerlink" title="ZFS简介"></a>ZFS简介</h2><p>　　<strong>1、什么是zfs文件系统</strong></p>
+  <a href="https://github.com/Ah-yuan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.ah-yuan.top/archives/daa27d8e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ah-yuan">
+      <meta itemprop="description" content="nothing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ah-yuan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZFS存储配置---文件服务
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-23 17:30:20" itemprop="dateCreated datePublished" datetime="2021-08-23T17:30:20+08:00">2021-08-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-30 15:57:20" itemprop="dateModified" datetime="2021-08-30T15:57:20+08:00">2021-08-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">存储配置</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/archives/daa27d8e.html" class="post-meta-item leancloud_visitors" data-flag-title="ZFS存储配置---文件服务" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="文件服务配置—ZFS"><a href="#文件服务配置—ZFS" class="headerlink" title="文件服务配置—ZFS"></a><strong>文件服务配置—ZFS</strong></h1><h2 id="ZFS简介"><a href="#ZFS简介" class="headerlink" title="ZFS简介"></a>ZFS简介</h2><p>　　<strong>1、什么是zfs文件系统</strong></p>
 <p>　　　　ZFS文件系统的英文名称为Zettabyte File System,也叫动态文件系统（Dynamic File System）,是第一个128位文件系统。最初是由Sun公司为Solaris 10操作系统开发的文件系统。作为OpenSolaris开源计划的一部分，ZFS于2005年11月发布，被Sun称为是终极文件系统，经历了 10 年的活跃开发。而最新的开发将全面开放，并重新命名为 OpenZFS。</p>
 <p>　　<strong>2、ZFS具有三个主要涉及目标</strong></p>
 <p>　　　　数据完整性：所有数据都包括数据的校验和。写入数据时，将计算并写入校验和。以后再读回该数据时，将再次计算校验和。如果校验和不匹配，则检测到数据错误。 当数据冗余可用时，ZFS将尝试自动更正错误。</p>
@@ -257,7 +286,7 @@
 <p><strong>2、存储池</strong></p>
 <p>ZFS结合了文件系统和卷管理器特性，与其他文件系统不同，ZFS可以创建跨越一系列硬盘或池的文件系统，还可以通过添加硬盘来增大池的存储容量，ZFS可以进行分区和格式化</p>
 <p>　　　　一个池由一个或多个vdev组成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172641.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172641.png"></p>
 <p><strong>3、写时复制技术</strong></p>
 <p>与传统文件系统不同，当在ZFS上覆盖数据室，新数据将被写入不同的块，而不是原地覆盖，仅在完成写入后，才更新元数据以指向新位置，如果发生大体量写入发送断电或系统崩溃，文件的整个原始内容仍然可用，并且不完整的写入将被丢弃，这也意味这意外关闭后，ZFS不需要运行fsck来检查和修复文件系统。</p>
 <p><strong>4、快照</strong></p>
@@ -286,374 +315,130 @@
 <p>ZFS版本到官方网站下载最新</p>
 </blockquote>
 <h3 id="设置本地yum-源"><a href="#设置本地yum-源" class="headerlink" title="设置本地yum 源"></a>设置本地yum 源</h3><p>搭建一个 本地的 YUM 源，在 /etc/yum.repos.d/ 创建一个 local.repo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /etc/yum.repos.d/ <br>touch local.repo<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d/ </span><br><span class="line">touch local.repo</span><br></pre></td></tr></table></figure>
 
 <p>将把下载的软件包加压到 /mnt/source，local.repo内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">[local]<br><br>name=local<br><br>baseurl=file:///mnt/source<br><br>gpgcheck=0<br><br>enabled=1<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[local]</span><br><span class="line"></span><br><span class="line">name=local</span><br><span class="line"></span><br><span class="line">baseurl=file:///mnt/source</span><br><span class="line"></span><br><span class="line">gpgcheck=0</span><br><span class="line"></span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823170459.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823170459.png"></p>
 <h3 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h3><p>需要首先安装 kernel-devel 包.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install kernel-devel<br>yum install zfs<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install kernel-devel</span><br><span class="line">yum install zfs</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>如果提示 未加载 zfs 文件系统，加载 zfs 文件系统 <code>/sbin/modprobe zfs</code></p>
 </blockquote>
 <h2 id="创建和管理磁盘资源"><a href="#创建和管理磁盘资源" class="headerlink" title="创建和管理磁盘资源"></a>创建和管理磁盘资源</h2><h3 id="创建zpool"><a href="#创建zpool" class="headerlink" title="创建zpool"></a>创建zpool</h3><p>假设 sda 为 OS 盘。 请检查你的系统 OS盘的盘符。 不要使用 OS 盘符。推荐36个硬盘，组建2个 raidz2 （raid6）的 磁盘组。 并保留 4个盘作为热备盘。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210824113200.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210824113200.png"></p>
 <blockquote>
 <p> 注意，pool的名字 会作为默认的挂载点。</p>
 </blockquote>
 <p>如果需要两个pool，可以使用命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">zpool create **naspool1** raidz2 sdb sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq spare sdr sds <br><br>zpool create **naspool2** raidz2 sdv sdw sdx sdy sdz sdaa sdab sdac sdad sdae sdaf sdag sdah sdai sdaj sdak spare sdt sdu<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zpool create **naspool1** raidz2 sdb sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq spare sdr sds </span><br><span class="line"></span><br><span class="line">zpool create **naspool2** raidz2 sdv sdw sdx sdy sdz sdaa sdab sdac sdad sdae sdaf sdag sdah sdai sdaj sdak spare sdt sdu</span><br></pre></td></tr></table></figure>
 
 <p>如果只需要一个 pool，可以使用命令：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">zpool</span> add **naspool<span class="hljs-number">1</span>** raidz<span class="hljs-number">2</span> sdv sdw sdx sdy sdz sdaa sdab sdac sdad sdae sdaf sdag sdah sdai sdaj sdak spare sdt sdu<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zpool add **naspool1** raidz2 sdv sdw sdx sdy sdz sdaa sdab sdac sdad sdae sdaf sdag sdah sdai sdaj sdak spare sdt sdu</span><br></pre></td></tr></table></figure>
 
 <p>pool 创建完成后，会自动在/ 目录挂载：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171251.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><code class="hljs tap"> [root@localhost etc]<span class="hljs-comment"># zpool status</span><br><br> pool: naspool1<br><br> state: ONLINE<br><br> scan: none requested<br><br>config:<br><br> <br><br>​    NAME    STATE   READ WRITE CKSUM<br><br>​    naspool1  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​     raidz2-0 ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdb   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdc   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdd   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sde   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdf   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdg   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdh   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdi   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdj   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdk   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdl   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdm   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdn   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdo   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdp   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdq   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​     raidz2-1 ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdv   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdw   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdx   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdy   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdz   ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdaa  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdab  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdac  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdad  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdae  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdaf  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdag  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdah  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdai  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdaj  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​      sdak  ONLINE   <span class="hljs-number"> 0 </span> <span class="hljs-number"> 0 </span>  0<br><br>​    spares<br><br>​     sdr    AVAIL<br><br>​     sds    AVAIL<br><br>​     sdt    AVAIL<br><br>​     sdu    AVAIL<br><br>[root@localhost etc]<span class="hljs-comment"># zpool list</span><br><br>NAME    SIZE ALLOC  FREE CKPOINT EXPANDSZ  FRAG  CAP DEDUP  HEALTH ALTROOT<br><br>naspool1  318G 6.92M  318G    -     -   0%   0% 1.00x  ONLINE -<br> <br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171251.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"> [root@localhost etc]# zpool status</span><br><span class="line"></span><br><span class="line"> pool: naspool1</span><br><span class="line"></span><br><span class="line"> state: ONLINE</span><br><span class="line"></span><br><span class="line"> scan: none requested</span><br><span class="line"></span><br><span class="line">config:</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">​    NAME    STATE   READ WRITE CKSUM</span><br><span class="line"></span><br><span class="line">​    naspool1  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​     raidz2-0 ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdb   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdc   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdd   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sde   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdf   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdg   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdh   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdi   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdj   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdk   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdl   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdm   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdn   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdo   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdp   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdq   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​     raidz2-1 ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdv   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdw   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdx   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdy   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdz   ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdaa  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdab  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdac  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdad  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdae  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdaf  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdag  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdah  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdai  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdaj  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​      sdak  ONLINE    0   0   0</span><br><span class="line"></span><br><span class="line">​    spares</span><br><span class="line"></span><br><span class="line">​     sdr    AVAIL</span><br><span class="line"></span><br><span class="line">​     sds    AVAIL</span><br><span class="line"></span><br><span class="line">​     sdt    AVAIL</span><br><span class="line"></span><br><span class="line">​     sdu    AVAIL</span><br><span class="line"></span><br><span class="line">[root@localhost etc]# zpool list</span><br><span class="line"></span><br><span class="line">NAME    SIZE ALLOC  FREE CKPOINT EXPANDSZ  FRAG  CAP DEDUP  HEALTH ALTROOT</span><br><span class="line"></span><br><span class="line">naspool1  318G 6.92M  318G    -     -   0%   0% 1.00x  ONLINE -</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 <p>删除一个 pool：<code>zpool destroy -f</code> </p>
-<h3 id="修改-zfs-挂载点"><a href="#修改-zfs-挂载点" class="headerlink" title="修改 zfs 挂载点"></a>修改 zfs 挂载点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">zfs umount -a<br>zfs set mountpoint=/zfsroot/naspool1 naspool1<br>zfs mount -a<br></code></pre></td></tr></table></figure>
+<h3 id="修改-zfs-挂载点"><a href="#修改-zfs-挂载点" class="headerlink" title="修改 zfs 挂载点"></a>修改 zfs 挂载点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zfs umount -a</span><br><span class="line">zfs set mountpoint=/zfsroot/naspool1 naspool1</span><br><span class="line">zfs mount -a</span><br></pre></td></tr></table></figure>
 
 <h2 id="设置NFS共享"><a href="#设置NFS共享" class="headerlink" title="设置NFS共享"></a>设置NFS共享</h2><p>本次采用的是单独的 NFS服务。</p>
 <p>修改 nfs 配置文件如下： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat /etc/exports<br><br>/naspool1 *(rw,no_root_squash)<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/exports</span><br><span class="line"></span><br><span class="line">/naspool1 *(rw,no_root_squash)</span><br></pre></td></tr></table></figure>
 
 <p> <strong>如果有防火墙问题，请参考</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">firewall-cmd --permanent --add-service=nfsfirewall-cmd --reload<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-service=nfsfirewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
 <p><strong>如果重启后 没有自动挂载 zfs 文件系统，可以通过手动加载：</strong> </p>
 <p>重启后 导入 pool：<code>zpool import</code></p>
 <p>修改 rc.local 可以自动挂载：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">给/etc/rc.local增加可执行权限。chmod +x /etc/rc.localvim /etc/rc.local<span class="hljs-comment">#在/etc/rc.local增加 reboot nfs 的命令systemctl restart nfs</span></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">给/etc/rc.local增加可执行权限。chmod +x /etc/rc.localvim /etc/rc.local<span class="comment">#在/etc/rc.local增加 reboot nfs 的命令systemctl restart nfs</span></span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171928.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="Vmware-数据存储示例"><a href="#Vmware-数据存储示例" class="headerlink" title="Vmware 数据存储示例"></a>Vmware 数据存储示例</h2><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172023.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172047.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172108.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172207.png" srcset="/img/loading.gif" lazyload></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172233.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172252.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823171928.png"></p>
+<h2 id="Vmware-数据存储示例"><a href="#Vmware-数据存储示例" class="headerlink" title="Vmware 数据存储示例"></a>Vmware 数据存储示例</h2><p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172023.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172047.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172108.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172207.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172233.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ah-yuan/blogimg/blog_img/20210823172252.png"></p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/">存储配置</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/ZFS/">ZFS</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/archives/87fb5dac.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">win10 + docker使用mysql</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/archives/e9c5978b.html">
-                        <span class="hidden-mobile">Github上更新自己Fork的库</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#comments', function() {
-      var light = 'github-light';
-      var dark = 'github-dark';
-      var schema = document.documentElement.getAttribute('data-user-color-scheme');
-      if (schema === 'dark') {
-        schema = dark;
-      } else {
-        schema = light;
-      }
-      window.UtterancesThemeLight = light;
-      window.UtterancesThemeDark = dark;
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'Ah-yuan/comments_blog');
-      s.setAttribute('issue-term', 'pathname');
-      
-      s.setAttribute('theme', schema);
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    })
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-              </article>
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ZFS/" rel="tag"># ZFS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/archives/e9c5978b.html" rel="prev" title="Github上更新自己Fork的库">
+                  <i class="fa fa-chevron-left"></i> Github上更新自己Fork的库
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/archives/87fb5dac.html" rel="next" title="win10 + docker使用mysql">
+                  win10 + docker使用mysql <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-      </div>
-    
-  </div>
+
+
+
+
+
 </div>
-
-<!-- Custom -->
-
-
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-
-    
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
-  
-  <div class="statistics">
-    
-    
+  <footer class="footer">
+    <div class="footer-inner">
 
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021031150号 </a>
+      <img src="/img/police_beian.png" alt=""><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=%E9%B2%81%E5%85%AC%E7%BD%91%E5%AE%89%E5%A4%87%2037152202000174%E5%8F%B7" rel="noopener" target="_blank">37152202000174 </a>
   </div>
 
-
-  
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        鲁ICP备2021031150号
-      </a>
-    </span>
-    
-      
-        <span>
-          <a
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37152202000174"
-            rel="nofollow noopener"
-            class="beian-police"
-            target="_blank"
-          >
-            
-              <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
-            
-            <span>鲁公网安备 37152202000174号</span>
-          </a>
-        </span>
-      
-    
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ah-yuan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
 
   
-</footer>
-
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-  <script defer src="/js/leancloud.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?abb97d6f4df3bff6bf6e36efa7164e68";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
 
 
 
 
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+  
 
 
-<!-- hexo injector body_end start -->
-  <script src="/js/custom.js"></script>
-<!-- hexo injector body_end end --></body>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"2f61s5lp5BylvRHSod8PCI66-gzGzoHsz","app_key":"SqkKhsJUVOkaBJwE8W45fGUK","server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
 </html>

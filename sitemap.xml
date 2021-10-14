@@ -116,14 +116,14 @@
   </url>
   
   <url>
-    <loc>http://www.ah-yuan.top/tags/hexo/</loc>
+    <loc>http://www.ah-yuan.top/tags/ZFS/</loc>
     <lastmod>2021-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.ah-yuan.top/tags/ZFS/</loc>
+    <loc>http://www.ah-yuan.top/tags/hexo/</loc>
     <lastmod>2021-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -167,14 +167,14 @@
   </url>
   
   <url>
-    <loc>http://www.ah-yuan.top/categories/blog/</loc>
+    <loc>http://www.ah-yuan.top/categories/%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2021-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.ah-yuan.top/categories/%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://www.ah-yuan.top/categories/blog/</loc>
     <lastmod>2021-10-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
